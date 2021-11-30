@@ -22,10 +22,9 @@ func ConvertItems(pipeline *Pipeline, set map[string]string) {
 
 		converter := func(originalPack ResourcePack, resource *Resource, pipeline *Pipeline) {
 			// don't save original
-			if strings.Contains(resource.Path, TransPath("/") + oldName + ".") {
+			if (strings.Contains(resource.Path, TransPath("/") + oldName + ".") && !strings.Contains(resource.Path, "custom/")) {
 				ogContent := resource.GetPipelineContent(pipeline)
 				delete(pipeline.WriteQueue, pipeline.OutFolder+resource.Path)
-
 				resource.Path = strings.Replace(resource.Path, oldName, updatedName, 1)
 				resource.ReadableName = strings.Replace(resource.ReadableName, oldName, updatedName, 1)
 				resource.UniqueName = strings.Replace(resource.UniqueName, oldName, updatedName, 1)
@@ -67,7 +66,7 @@ func ConvertItems(pipeline *Pipeline, set map[string]string) {
 				asString = strings.ToLower(asString)
 
 				for s := range set {
-					if strings.HasSuffix(asString, TransPath("/") + s) && !strings.Contains(asString, TransPath("custom/")) {
+					if strings.HasSuffix(asString, TransPath("/") + s) && !strings.Contains(asString, "custom/") {
 						asString = strings.Replace(asString, s, set[s], -1)
 					}
 				}
