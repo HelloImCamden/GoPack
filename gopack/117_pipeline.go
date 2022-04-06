@@ -8,18 +8,21 @@ func Make117Pipeline() {
 	// remove comments
 	pipeline.AddForFileType("json", RemoveComment())
 
-	MakeEverythingLowercase(pipeline)
-	RenamePackFolders(pipeline)
-	ConvertItems(pipeline, Get14Blocks())
-	ConvertItems(pipeline, Get14Items())
-	ConvertItems(pipeline, GetBlocks())
-	ConvertItems(pipeline, GetItems())
-	ForceContent(pipeline, GetForcedContent())
-	MigrateLanguage(pipeline, GetLang())
-
-	//CompressResources(pipeline)
-	//CopyItems(pipeline, TransPath("work/115"))
+	//MakeEverythingLowercase(pipeline)
+	//RenamePackFolders(pipeline)
+	//ConvertItems(pipeline, Get14Blocks())
+	//ConvertItems(pipeline, Get14Items())
+	//ConvertItems(pipeline, GetBlocks())
+	//ConvertItems(pipeline, GetItems())
+	//ForceContent(pipeline, GetForcedContent())
+	//MigrateLanguage(pipeline, GetLang())
 
 	pipeline.SaveUntouched()
+	pipeline.SkipGeneralProcessing = true
+
+	//CompressResources(pipeline)
+	CopyItems(pipeline, TransPath("work/115"), true)
+
+
 	AddPipeline(pipeline)
 }

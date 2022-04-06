@@ -14,6 +14,9 @@ type Pipeline struct {
 	WriteQueue                map[string][]byte
 	WrittenFiles              map[string][]byte
 	OutputName                string
+	StartHandlers			  []func(pipeline *Pipeline)
+	FinishHandlers			  []func(pipeline *Pipeline)
+	SkipGeneralProcessing	  bool
 }
 
 // create a pipeline with a name (which will also be the output directory/pack and version)
@@ -28,6 +31,9 @@ func CreatePipeline(name string, out string, outputName string) *Pipeline {
 		WriteQueue:                make(map[string][]byte),
 		WrittenFiles:              make(map[string][]byte),
 		OutputName:                outputName,
+		StartHandlers:			   []func(pipeline *Pipeline){},
+		FinishHandlers:			   []func(pipeline *Pipeline){},
+		SkipGeneralProcessing:	   false,
 	}
 }
 
@@ -46,6 +52,14 @@ func (p *Pipeline) AddForFileType(filetype string, handler func(originalPack Res
 			handler(originalPack, resource, pipeline)
 		}
 	})
+}
+
+func (p *Pipeline) AddStartHandler(handler func(pipeline *Pipeline)) {
+	p.StartHandlers = append(p.StartHandlers, handler)
+}
+
+func (p *Pipeline) AddFinishHandler(handler func(pipeline *Pipeline)) {
+	p.FinishHandlers = append(p.FinishHandlers, handler)
 }
 
 // add a handler for files with a regex

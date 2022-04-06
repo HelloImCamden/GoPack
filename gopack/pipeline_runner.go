@@ -25,6 +25,10 @@ func RunPipelines(originalPack ResourcePack) {
 		pack := originalPack // copy the pack for every pipeline, to prevent destruction
 		pipe := Pipelines[i] // copy the pipeline
 
+		for _, task := range pipe.StartHandlers {
+			task(pipe)
+		}
+
 		tasks := (len(pipe.Handlers) + len(pipe.UntouchedResourceHandlers)) * len(pack.FileCollection.NameToPath)
 		ntp := pack.FileCollection.NameToPath
 		loadedCount := 0
@@ -45,6 +49,13 @@ func RunPipelines(originalPack ResourcePack) {
 		for s := range ntp {
 			originalFile := ntp[s]
 			file := &originalFile
+			if pipe.SkipGeneralProcessing {
+				// Even if we aren't using the main processing loop we still need these to make a pack!
+				if !(strings.Contains(file.ReadableName, "pack.png") || strings.Contains(file.ReadableName, "pack.mcmeta")) {
+					continue
+				}
+				fmt.Println(file.ReadableName)
+			}
 			if strings.Contains(file.OsPath, ".") {
 				// go over all handlers
 				hdlr := pipe.Handlers
@@ -76,6 +87,10 @@ func RunPipelines(originalPack ResourcePack) {
 
 		writtenFiles := pipe.Flush()
 		out := pipe.WrittenFiles
+
+		for _, task := range pipe.FinishHandlers {
+			task(pipe)
+		}
 
 		for s := range out {
 			if !fileExists(s) {
