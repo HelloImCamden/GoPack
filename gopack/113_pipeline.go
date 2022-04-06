@@ -9,7 +9,6 @@ func Make113Pipeline() {
 	// remove comments
 	pipeline.AddForFileType("json", RemoveComment())
 
-
 	MakeEverythingLowercase(pipeline)
 	RenamePackFolders(pipeline)
 	ConvertItems(pipeline, Get14Blocks())
@@ -17,7 +16,7 @@ func Make113Pipeline() {
 	ForceContent(pipeline, GetForcedContent())
 	MigrateLanguage(pipeline, GetLang14())
 
-	CompressResources(pipeline)
+	//CompressResources(pipeline)
 
 	pipeline.SaveUntouched()
 	AddPipeline(pipeline)

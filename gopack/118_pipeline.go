@@ -17,7 +17,8 @@ func Make118Pipeline() {
 	ForceContent(pipeline, GetForcedContent())
 	MigrateLanguage(pipeline, GetLang())
 
-	CompressResources(pipeline)
+	//CompressResources(pipeline)
+	//CopyItems(pipeline, TransPath("work/115"))
 
 	pipeline.SaveUntouched()
 	AddPipeline(pipeline)

@@ -6,6 +6,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.0.5
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
+	github.com/otiai10/copy v1.7.0
 	github.com/sirupsen/logrus v1.6.0
 	github.com/stretchr/testify v1.5.1 // indirect
 	github.com/tidwall/gjson v1.6.1
