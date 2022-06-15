@@ -7,22 +7,9 @@ func Make117Pipeline() {
 	pipeline.AddForFileName("pack.mcmeta", SetMetaRevision(7))
 	// remove comments
 	pipeline.AddForFileType("json", RemoveComment())
-
-	//MakeEverythingLowercase(pipeline)
-	//RenamePackFolders(pipeline)
-	//ConvertItems(pipeline, Get14Blocks())
-	//ConvertItems(pipeline, Get14Items())
-	//ConvertItems(pipeline, GetBlocks())
-	//ConvertItems(pipeline, GetItems())
-	//ForceContent(pipeline, GetForcedContent())
-	//MigrateLanguage(pipeline, GetLang())
-
 	pipeline.SaveUntouched()
 	pipeline.SkipGeneralProcessing = true
-
-	//CompressResources(pipeline)
 	CopyItems(pipeline, TransPath("work/115"), true)
-
 
 	AddPipeline(pipeline)
 }

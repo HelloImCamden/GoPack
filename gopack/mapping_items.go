@@ -33,7 +33,7 @@ const items14 = `
 "dye_powder_red": "red_dye",
 "dye_powder_silver": "light_gray_dye",
 "dye_powder_white": "white_dye",
-"dye_powder_yellow": "yellow_dye"
+"dye_powder_yellow": "yellow_dye",
 "silver_shulker_box": "light_gray_shulker_box"
 }
 `

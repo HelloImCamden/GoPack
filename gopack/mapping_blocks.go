@@ -3,7 +3,8 @@ package gopack
 const blocks14 = `
 {
 "stone_slab_top": "smooth_stone",
-"stone_slab_side": "smooth_stone_slab_side"
+"stone_slab_side": "smooth_stone_slab_side",
+"silver_shulker_box": "light_gray_shulker_box"
 }
 `
 

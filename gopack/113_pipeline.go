@@ -16,8 +16,6 @@ func Make113Pipeline() {
 	ForceContent(pipeline, GetForcedContent())
 	MigrateLanguage(pipeline, GetLang14())
 
-	//CompressResources(pipeline)
-
 	pipeline.SaveUntouched()
 	AddPipeline(pipeline)
 }
